@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../common/global_variables.dart';
 import 'demopage.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -21,18 +22,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: PageStorage(
         bucket: bucket,
         child: currentScreen,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.camera_alt),
+      floatingActionButton: Container(
+        height: 75.0,
+        width: 75.0,
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: GlobalVariables.mainColor,
+          elevation: 15.0,
+          highlightElevation: 20,
+          child: Icon(
+            Icons.camera_alt,
+            size: 50,
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 18,
+        notchMargin: 10,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -54,16 +66,36 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       children: [
                         Icon(
                           Icons.home,
-                          color:
-                              currentTab == 0 ? Colors.blueAccent : Colors.grey,
+                          size: 55,
+                          color: currentTab == 0
+                              ? GlobalVariables.mainColor
+                              : Colors.grey,
                         ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                            color: currentTab == 0
-                                ? Colors.blueAccent
-                                : Colors.grey,
-                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = Demo();
+                        currentTab = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 55,
+                          color: currentTab == 1
+                              ? GlobalVariables.mainColor
+                              : Colors.grey,
                         ),
                       ],
                     ),

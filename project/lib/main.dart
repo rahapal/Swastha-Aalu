@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/screens/bottomNavBar.dart';
+import 'package:project/screens/demopage.dart';
 
 void main() {
   runApp(
@@ -21,11 +23,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Swastha Alu'),
-        ),
-      ),
+      title: 'main',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const BottomNavBar(),
+        '/second': (context) => const Demo(),
+      },
     );
   }
 }
