@@ -13,11 +13,11 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentTab = 0;
   final List<Widget> screens = [
-    Demo(),
-    Demo(),
+    const Demo(),
+    const Demo(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = Demo();
+  Widget currentScreen = const Demo();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         bucket: bucket,
         child: currentScreen,
       ),
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         height: 75.0,
         width: 75.0,
         child: FloatingActionButton(
@@ -35,7 +35,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           backgroundColor: GlobalVariables.mainColor,
           elevation: 15.0,
           highlightElevation: 20,
-          child: Icon(
+          child: const Icon(
             Icons.camera_alt,
             size: 50,
           ),
@@ -57,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Demo();
+                        currentScreen = const Demo();
                         currentTab = 0;
                       });
                     },
@@ -83,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Demo();
+                        currentScreen = const Demo();
                         currentTab = 1;
                       });
                     },
