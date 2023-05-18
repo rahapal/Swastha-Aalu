@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/screens/Profile/profilepage.dart';
 
 import '../common/global_variables.dart';
 import 'demopage.dart';
@@ -14,7 +15,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int currentTab = 0;
   final List<Widget> screens = [
     const Demo(),
-    const Demo(),
+    const ProfilePage(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const Demo();
@@ -83,7 +84,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Demo();
+                        currentScreen = const ProfilePage();
                         currentTab = 1;
                       });
                     },

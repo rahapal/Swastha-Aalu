@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/route/routes.dart';
 import 'package:project/screens/bottomNavBar.dart';
 import 'package:project/screens/demopage.dart';
 
@@ -21,14 +22,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'main',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const BottomNavBar(),
-        '/second': (context) => const Demo(),
-      },
+      initialRoute: Routes.home,
+      onGenerateRoute: generateRoute,
     );
   }
 }
