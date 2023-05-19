@@ -59,6 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ListView(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             children: const [
               ListTile(
                 leading: Icon(Icons.person, color: GlobalVariables.mainColor),
