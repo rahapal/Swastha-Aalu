@@ -32,17 +32,15 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 110,
-                height: 110,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/profile.jpg'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+            children: const <Widget>[
+              SizedBox(
+                width: 100,
+                height: 120,
+                child: CircleAvatar(
+                    //   backgroundColor: GlobalVariables.mainColor,
+                    //   child: Icon(Icons.person, size: 75, color: Colors.white),
+                    // ),
+                    backgroundImage: AssetImage('assets/profile.jpg')),
               ),
             ],
           ),
@@ -58,6 +56,105 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(
             height: 20,
+          ),
+          ListView(
+            shrinkWrap: true,
+            children: const [
+              ListTile(
+                leading: Icon(Icons.person, color: GlobalVariables.mainColor),
+                title: Text(
+                  'Personal Information',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+              ListTile(
+                leading: Icon(Icons.password, color: GlobalVariables.mainColor),
+                title: Text(
+                  'Change Password',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.article,
+                  color: GlobalVariables.mainColor,
+                ),
+                title: Text(
+                  'Terms and Conditions',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+              ListTile(
+                leading:
+                    Icon(Icons.contact_page, color: GlobalVariables.mainColor),
+                title: Text(
+                  'Contact Us',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.help,
+                  color: GlobalVariables.mainColor,
+                ),
+                title: Text(
+                  'Help and Support',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+              ListTile(
+                leading: Icon(Icons.info, color: GlobalVariables.mainColor),
+                title: Text(
+                  'About Us',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios,
+                    color: GlobalVariables.mainColor),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            child: Container(
+              width: 180,
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: GlobalVariables.mainColor,
+              ),
+              child: const Center(
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
