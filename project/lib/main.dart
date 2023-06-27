@@ -1,9 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:project/model/localdb.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:project/controller/provider.dart';
 import 'package:project/route/routes.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Directory directory = await getApplicationDocumentsDirectory();
+
+  Hive.init(directory.path);
+  Hive.registerAdapter(DetailsAdapter());
+  var Dbox = await Hive.openBox<Details>('details');
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,

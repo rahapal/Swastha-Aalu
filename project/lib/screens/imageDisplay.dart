@@ -16,18 +16,6 @@ class ImageDisplay extends StatefulWidget {
 }
 
 class _ImageDisplayState extends State<ImageDisplay> {
-  // late Timer timer;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   timer = Timer.periodic(
-  //       const Duration(milliseconds: 1),
-  //       (Timer t) => setState(() {
-  //             widget.image;
-  //           }));
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
