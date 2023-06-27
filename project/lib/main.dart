@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project/controller/provider.dart';
 import 'package:project/route/routes.dart';
-import 'package:project/screens/bottomNavBar.dart';
-import 'package:project/screens/demopage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -22,11 +22,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'main',
-      initialRoute: Routes.home,
-      onGenerateRoute: generateRoute,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProviderApp()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'main',
+        initialRoute: Routes.home,
+        onGenerateRoute: generateRoute,
+      ),
     );
   }
 }

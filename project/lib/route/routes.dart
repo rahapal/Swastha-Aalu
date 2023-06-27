@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project/screens/Profile/profilepage.dart';
 
 import '../screens/bottomNavBar.dart';
-import '../screens/demopage.dart';
 
 class Routes {
   static const String home = '/';

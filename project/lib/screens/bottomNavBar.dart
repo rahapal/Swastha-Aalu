@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project/screens/Profile/profilepage.dart';
+import 'package:provider/provider.dart';
 
 import '../common/global_variables.dart';
 import 'demopage.dart';
+import 'imageDisplay.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -19,6 +24,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const Demo();
+  File? _image;
+
+  Future imageGallery(ImageSource media) async {
+    final image = await ImagePicker().pickImage(source: media);
+    if (image == null) return;
+    final imageTemp = File(image.path);
+
+    setState(() {
+      _image = imageTemp;
+    });
+    return _image;
+  }
+
+  Future imageCamera(ImageSource media) async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+    final imageTemp = File(image.path);
+
+    setState(() {
+      _image = imageTemp;
+    });
+    return _image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +60,68 @@ class _BottomNavBarState extends State<BottomNavBar> {
         height: 75.0,
         width: 75.0,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (builder) {
+                  return Card(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 7.2,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: const Icon(
+                              Icons.camera_alt,
+                              size: 50,
+                              color: GlobalVariables.mainColor,
+                            ),
+                            title: const Text(
+                              "Camera",
+                            ),
+                            onTap: () {
+                              imageCamera(ImageSource.camera)
+                                  .then((value) => setState(() {
+                                        _image = value;
+                                      }));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageDisplay(
+                                    image: _image,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.photo_album,
+                              size: 50,
+                              color: GlobalVariables.mainColor,
+                            ),
+                            title: const Text("Gallery"),
+                            onTap: () {
+                              imageGallery(ImageSource.gallery)
+                                  .then((value) => setState(() {
+                                        _image = value;
+                                      }));
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageDisplay(
+                                    image: _image,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          },
           backgroundColor: GlobalVariables.mainColor,
           elevation: 15.0,
           highlightElevation: 20,
