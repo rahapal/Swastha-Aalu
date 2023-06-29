@@ -10,12 +10,13 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   Directory directory = await getApplicationDocumentsDirectory();
-
   Hive.init(directory.path);
   Hive.registerAdapter(DetailsAdapter());
   var Dbox = await Hive.openBox<Details>('details');
+
+  //print(Dbox.values);
+
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -38,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => ProviderApp()),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'main',
         initialRoute: Routes.home,

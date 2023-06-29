@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project/model/localdb.dart';
 import 'package:project/screens/Profile/profilepage.dart';
 import 'package:provider/provider.dart';
 
 import '../common/global_variables.dart';
+import '../controller/provider.dart';
 import 'demopage.dart';
 import 'imageDisplay.dart';
 
@@ -22,9 +25,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const Demo(),
     const ProfilePage(),
   ];
+
+  late Box<Details> Dbox;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const Demo();
   File? _image;
+
+  @override
+  void initState() {
+    Dbox = Hive.box<Details>('details');
+    super.initState();
+  }
 
   Future imageGallery(ImageSource media) async {
     final image = await ImagePicker().pickImage(source: media);
@@ -50,6 +61,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderApp>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: PageStorage(
@@ -79,18 +91,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
                               "Camera",
                             ),
                             onTap: () {
-                              imageCamera(ImageSource.camera)
-                                  .then((value) => setState(() {
-                                        _image = value;
-                                      }));
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ImageDisplay(
-                                    image: _image,
-                                  ),
-                                ),
-                              );
+                              imageGallery(ImageSource.camera).then((value) {
+                                if (value != null) {
+                                  setState(() {
+                                    _image = value;
+                                  });
+                                  provider
+                                      .addImage(Details(image: _image!.path));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ImageDisplay()),
+                                  );
+                                }
+                              });
                             },
                           ),
                           ListTile(
@@ -101,19 +116,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
                             ),
                             title: const Text("Gallery"),
                             onTap: () {
-                              imageGallery(ImageSource.gallery)
-                                  .then((value) => setState(() {
-                                        _image = value;
-                                      }));
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ImageDisplay(
-                                    image: _image,
-                                  ),
-                                ),
-                              );
+                              imageGallery(ImageSource.gallery).then((value) {
+                                if (value != null) {
+                                  setState(() {
+                                    _image = value;
+                                  });
+                                  provider
+                                      .addImage(Details(image: _image!.path));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ImageDisplay()),
+                                  );
+                                }
+                              });
                             },
                           ),
                         ],
