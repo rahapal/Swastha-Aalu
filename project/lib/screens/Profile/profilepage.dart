@@ -30,9 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 20,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               SizedBox(
                 width: 100,
                 height: 120,

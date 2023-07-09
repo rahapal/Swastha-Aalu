@@ -13,9 +13,9 @@ void main() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.registerAdapter(DetailsAdapter());
-  var Dbox = await Hive.openBox<Details>('details');
+  var dbox = await Hive.openBox<Details>('details');
 
-  //print(Dbox.values);
+  //print(dbox.values);
 
   runApp(
     const MaterialApp(

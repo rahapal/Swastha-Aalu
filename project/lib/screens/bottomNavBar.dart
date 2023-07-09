@@ -26,14 +26,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const ProfilePage(),
   ];
 
-  late Box<Details> Dbox;
+  late Box<Details> dbox;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const Demo();
   File? _image;
 
   @override
   void initState() {
-    Dbox = Hive.box<Details>('details');
+    dbox = Hive.box<Details>('details');
     super.initState();
   }
 
@@ -126,8 +126,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ImageDisplay()),
+                                        builder: (context) => ImageDisplay()),
                                   );
                                 }
                               });

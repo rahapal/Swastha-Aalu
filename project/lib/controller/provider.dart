@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -18,5 +16,11 @@ class ProviderApp with ChangeNotifier {
     var image = box.getAt(box.length - 1);
 
     return image!;
+  }
+
+  Future<void> updateImage(Details details) async {
+    var box = await Hive.openBox<Details>('details');
+    box.putAt(box.length - 1, details);
+    notifyListeners();
   }
 }
