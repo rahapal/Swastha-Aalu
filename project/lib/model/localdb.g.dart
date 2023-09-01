@@ -20,19 +20,22 @@ class DetailsAdapter extends TypeAdapter<Details> {
       image: fields[0] as String,
       disease: fields[1] as String,
       percentage: fields[2] as String,
+      useremail: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Details obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.image)
       ..writeByte(1)
       ..write(obj.disease)
       ..writeByte(2)
-      ..write(obj.percentage);
+      ..write(obj.percentage)
+      ..writeByte(3)
+      ..write(obj.useremail);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:project/model/localdb.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.registerAdapter(DetailsAdapter());
@@ -42,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'main',
-        initialRoute: Routes.home,
+        initialRoute: Routes.splash,
         onGenerateRoute: generateRoute,
       ),
     );

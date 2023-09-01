@@ -6,10 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:project/common/global_variables.dart';
 import 'package:project/screens/bottomNavBar.dart';
+import 'package:project/screens/demopage.dart';
 import 'package:provider/provider.dart';
 
 import '../controller/provider.dart';
-import '../model/localdb.dart';
+//import '../model/localdb.dart';
 
 class ImageDisplay extends StatefulWidget {
   const ImageDisplay({super.key});
@@ -23,7 +24,7 @@ class _ImageDisplayState extends State<ImageDisplay> {
   String percentage = '';
 
   Future<Response> predict(File image) async {
-    final url = Uri.parse('http://192.168.0.6:8000/api/predict');
+    final url = Uri.parse('http://192.168.0.2:8000/api/predict');
     final request = http.MultipartRequest('POST', url);
     request.files.add(
       await http.MultipartFile.fromPath('file', image.path),
@@ -66,7 +67,10 @@ class _ImageDisplayState extends State<ImageDisplay> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const BottomNavBar()),
+              MaterialPageRoute(
+                  builder: (context) => BottomNavBar(
+                        username: '',
+                      )),
             );
           },
         ),
@@ -106,21 +110,15 @@ class _ImageDisplayState extends State<ImageDisplay> {
               //           child: const Text('NO'),
               //         ),
               //         TextButton(
-              //           onPressed: () {
-              //             provider.updateImage(Details(
-              //               image: provider.showImage().toString(),
-              //               disease: '',
-              //               percentage: '',
-              //             ));
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                 builder: (context) => const BottomNavBar(),
-              //               ),
-              //             );
-              //           },
-              //           child: const Text('YES'),
-              //         ),
+              //             onPressed: () {
+              //               Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                   builder: (context) => const Demo(),
+              //                 ),
+              //               );
+              //             },
+              //             child: const Text('YES'))
               //       ],
               //     );
               //   },

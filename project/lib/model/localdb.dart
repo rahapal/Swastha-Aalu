@@ -10,10 +10,13 @@ class Details {
   String disease;
   @HiveField(2)
   String percentage;
+  @HiveField(3)
+  String useremail;
 
   Details({
     required this.image,
     this.disease = 'ok',
     this.percentage = 'ok',
+    required this.useremail,
   });
 }

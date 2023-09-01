@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project/common/global_variables.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String username;
+  ProfilePage({Key? key, required this.username}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -47,8 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 9,
           ),
-          const Text(
-            'Sushant Rahapal',
+          Text(
+            '${widget.username}',
             style: TextStyle(
               fontSize: 20,
               color: Colors.black,
@@ -60,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [
+            children: [
               ListTile(
                 leading: Icon(Icons.person, color: GlobalVariables.mainColor),
                 title: Text(

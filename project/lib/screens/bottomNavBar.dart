@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project/model/localdb.dart';
 import 'package:project/screens/Profile/profilepage.dart';
+import 'package:project/screens/home.dart';
 import 'package:provider/provider.dart';
 
 import '../common/global_variables.dart';
@@ -13,7 +14,8 @@ import 'demopage.dart';
 import 'imageDisplay.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  final String username;
+  const BottomNavBar({Key? key, required this.username}) : super(key: key);
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -22,13 +24,16 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentTab = 0;
   final List<Widget> screens = [
+    const HomePage(),
     const Demo(),
-    const ProfilePage(),
+    ProfilePage(
+      username: '',
+    ),
   ];
 
   late Box<Details> dbox;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const Demo();
+  Widget currentScreen = const HomePage();
   File? _image;
 
   @override
@@ -96,8 +101,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   setState(() {
                                     _image = value;
                                   });
-                                  provider
-                                      .addImage(Details(image: _image!.path));
+                                  provider.addImage(Details(
+                                      image: _image!.path,
+                                      useremail: widget.username));
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -121,8 +127,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   setState(() {
                                     _image = value;
                                   });
-                                  provider
-                                      .addImage(Details(image: _image!.path));
+                                  provider.addImage(Details(
+                                      image: _image!.path,
+                                      useremail: widget.username));
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -162,8 +169,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   MaterialButton(
                     minWidth: 40,
                     onPressed: () {
+                      //dbox.clear();
                       setState(() {
-                        currentScreen = const Demo();
+                        currentScreen = const HomePage();
                         currentTab = 0;
                       });
                     },
@@ -189,7 +197,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const ProfilePage();
+                        currentScreen = ProfilePage(username: widget.username);
                         currentTab = 1;
                       });
                     },
