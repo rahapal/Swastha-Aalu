@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,16 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
+  void _showSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2), // Adjust the duration as needed
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -172,27 +184,36 @@ class _RegisterFormState extends State<RegisterForm> {
 
                   return;
                 }
+                try {
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: emailController.text.trim(),
+                    password: passwordController.text.trim(),
+                  );
 
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: emailController.text.trim(),
-                  password: passwordController.text.trim(),
-                );
+                  final userId = FirebaseAuth.instance.currentUser?.uid;
+                  print(userId);
+                  print(FirebaseAuth.instance.currentUser?.email);
 
-                final userId = FirebaseAuth.instance.currentUser?.uid;
-                print(userId);
-                print(FirebaseAuth.instance.currentUser?.email);
+                  final docUser =
+                      FirebaseFirestore.instance.collection('users');
 
-                final docUser = FirebaseFirestore.instance.collection('users');
+                  final user = User(
+                    email_address: emailController.text,
+                  );
 
-                final user = User(
-                  email_address: emailController.text,
-                );
+                  final json = user.toJson();
+                  await docUser.doc(userId).set(json);
 
-                final json = user.toJson();
-                await docUser.doc(userId).set(json);
+                  // Display a success Snackbar
+                  _showSnackbar("Account created successfully!");
 
-                if (_formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, 'login');
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.pushNamed(context, 'login');
+                  }
+                } catch (e) {
+                  // Handle account creation error
+                  _showSnackbar("Account already exists or an error occurred.");
+                  Logger().e("Account creation error: $e");
                 }
               },
               child: Text('Signup'),

@@ -17,6 +17,16 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+            ),
+            centerTitle: true),
         body: Center(
           child: Card(
             shape: RoundedRectangleBorder(

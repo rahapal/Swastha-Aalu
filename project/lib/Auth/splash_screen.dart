@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project/Auth/registration.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
