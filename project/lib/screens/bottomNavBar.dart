@@ -24,7 +24,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentTab = 0;
   final List<Widget> screens = [
-    const HomePage(),
+    HomePage(username: ''),
     const Demo(),
     ProfilePage(
       username: '',
@@ -33,7 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   late Box<Details> dbox;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const HomePage();
+  Widget currentScreen = HomePage(username: '');
   File? _image;
 
   @override
@@ -83,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 builder: (builder) {
                   return Card(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 7.2,
+                      height: MediaQuery.of(context).size.height / 7.1,
                       child: Column(
                         children: [
                           ListTile(
@@ -96,6 +96,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                               "Camera",
                             ),
                             onTap: () {
+                              print("Camera:${widget.username}");
                               imageGallery(ImageSource.camera).then((value) {
                                 if (value != null) {
                                   setState(() {
@@ -107,8 +108,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ImageDisplay()),
+                                        builder: (context) => ImageDisplay(
+                                              useremail: widget.username,
+                                              image: _image!.path,
+                                            )),
                                   );
                                 }
                               });
@@ -122,6 +125,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                             ),
                             title: const Text("Gallery"),
                             onTap: () {
+                              print("Gallery:${widget.username}");
                               imageGallery(ImageSource.gallery).then((value) {
                                 if (value != null) {
                                   setState(() {
@@ -133,7 +137,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ImageDisplay()),
+                                        builder: (context) => ImageDisplay(
+                                              useremail: widget.username,
+                                              image: _image!.path,
+                                            )),
                                   );
                                 }
                               });
@@ -170,8 +177,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     minWidth: 40,
                     onPressed: () {
                       //dbox.clear();
+                      print("HOME:${widget.username}");
                       setState(() {
-                        currentScreen = const HomePage();
+                        currentScreen = HomePage(username: widget.username);
                         currentTab = 0;
                       });
                     },
@@ -196,6 +204,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   MaterialButton(
                     minWidth: 40,
                     onPressed: () {
+                      print("Profile:${widget.username}");
                       setState(() {
                         currentScreen = ProfilePage(username: widget.username);
                         currentTab = 1;

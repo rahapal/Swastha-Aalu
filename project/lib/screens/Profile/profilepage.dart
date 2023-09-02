@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/Auth/splash_screen.dart';
 import 'package:project/common/global_variables.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
             color: GlobalVariables.mainColor,
           ),
         ),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
@@ -49,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 9,
           ),
           Text(
-            '${widget.username}',
+            '${widget.username.split('@')[0]}',
             style: TextStyle(
               fontSize: 20,
               color: Colors.black,
@@ -58,103 +60,123 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 20,
           ),
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              ListTile(
-                leading: Icon(Icons.person, color: GlobalVariables.mainColor),
-                title: Text(
-                  'Personal Information',
-                  style: TextStyle(
-                    color: Colors.black,
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                ListTile(
+                  leading: Icon(Icons.person, color: GlobalVariables.mainColor),
+                  title: Text(
+                    'Personal Information',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-              ListTile(
-                leading: Icon(Icons.password, color: GlobalVariables.mainColor),
-                title: Text(
-                  'Change Password',
-                  style: TextStyle(
-                    color: Colors.black,
+                ListTile(
+                  leading:
+                      Icon(Icons.password, color: GlobalVariables.mainColor),
+                  title: Text(
+                    'Change Password',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.article,
-                  color: GlobalVariables.mainColor,
-                ),
-                title: Text(
-                  'Terms and Conditions',
-                  style: TextStyle(
-                    color: Colors.black,
+                ListTile(
+                  leading: Icon(
+                    Icons.article,
+                    color: GlobalVariables.mainColor,
                   ),
-                ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-              ListTile(
-                leading:
-                    Icon(Icons.contact_page, color: GlobalVariables.mainColor),
-                title: Text(
-                  'Contact Us',
-                  style: TextStyle(
-                    color: Colors.black,
+                  title: Text(
+                    'Terms and Conditions',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.help,
-                  color: GlobalVariables.mainColor,
-                ),
-                title: Text(
-                  'Help and Support',
-                  style: TextStyle(
-                    color: Colors.black,
+                ListTile(
+                  leading: Icon(Icons.contact_page,
+                      color: GlobalVariables.mainColor),
+                  title: Text(
+                    'Contact Us',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-              ListTile(
-                leading: Icon(Icons.info, color: GlobalVariables.mainColor),
-                title: Text(
-                  'About Us',
-                  style: TextStyle(
-                    color: Colors.black,
+                ListTile(
+                  leading: Icon(
+                    Icons.help,
+                    color: GlobalVariables.mainColor,
                   ),
+                  title: Text(
+                    'Help and Support',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios,
-                    color: GlobalVariables.mainColor),
-              ),
-            ],
+                ListTile(
+                  leading: Icon(Icons.info, color: GlobalVariables.mainColor),
+                  title: Text(
+                    'About Us',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      color: GlobalVariables.mainColor),
+                ),
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            padding: const EdgeInsets.only(top: 10, bottom: 45),
             child: Container(
-              width: 180,
+              width: 160,
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7),
                 color: GlobalVariables.mainColor,
               ),
-              child: const Center(
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
+              child: Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SplashScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
+                //  Text(
+                //   'Logout',
+                //   style: TextStyle(
+                //     fontSize: 22,
+                //     color: Colors.white,
+                //   ),
+                // ),
               ),
             ),
           ),
