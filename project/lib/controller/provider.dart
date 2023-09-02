@@ -18,9 +18,9 @@ class ProviderApp with ChangeNotifier {
     return image!;
   }
 
-  Future<void> updateImage(Details details) async {
+  Future<void> addInformation(Details details) async {
     var box = await Hive.openBox<Details>('details');
-    box.putAt(box.length - 1, details);
+    box.put(box.length - 1, details);
     notifyListeners();
   }
 }
