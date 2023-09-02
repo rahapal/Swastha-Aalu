@@ -33,17 +33,24 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 20,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                width: 100,
-                height: 120,
-                child: CircleAvatar(
-                    //   backgroundColor: GlobalVariables.mainColor,
-                    //   child: Icon(Icons.person, size: 75, color: Colors.white),
-                    // ),
-                    backgroundImage: AssetImage('assets/profile.jpg')),
+                width: 95,
+                height: 95,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      width: 2,
+                      color: GlobalVariables.mainColor,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage('assets/profile.jpg')),
+                ),
               ),
             ],
           ),
@@ -170,13 +177,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                //  Text(
-                //   'Logout',
-                //   style: TextStyle(
-                //     fontSize: 22,
-                //     color: Colors.white,
-                //   ),
-                // ),
               ),
             ),
           ),
